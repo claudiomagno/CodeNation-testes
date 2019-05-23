@@ -1,6 +1,7 @@
 
 import json,pathlib,os,time,requests
 from tkinter import *
+from tkinter import messagebox
 
 class MyWindow:
     def __init__(self, win):
@@ -28,6 +29,8 @@ class MyWindow:
         self.lbl3.place(x=100, y=200)
         #self.t3.place(x=200, y=200)
     def add(self):
+        if self.t1.get() == '' or self.t2.get() == '':return messagebox.showinfo("Erro", "Informe URL/Token")
+
         result=self.salvar_arquivo(os.getcwd(),'answer','json',self.get_acesso(self.t1.get(),self.t2.get()))
         #self.t3.insert(END, str(result))
         self.lbl3.configure( text=result)
@@ -64,6 +67,7 @@ class MyWindow:
         decifrado = ''
         ignore=[' ','.','!','?',':',';',',']
         #mensagem = mensagem.replace('.','')
+		mensagem = mensagem.lower()
         for letra in mensagem:
            if letra.isalpha():
              numero = ord(letra) - chave
